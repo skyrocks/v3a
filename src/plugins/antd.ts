@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 
-import { Button, Modal, Table, Menu, Input, Form, Checkbox, Radio } from 'ant-design-vue'
+import { Row, Col, Button, Input, Form, Table, Modal, Menu } from 'ant-design-vue'
 
 export function setupAntd(app: App<Element>) {
-  app.use(Button).use(Form).use(Input).use(Modal).use(Table).use(Menu).use(Checkbox).use(Radio)
+  app.use(Row).use(Col).use(Button).use(Input).use(Form).use(Table).use(Modal).use(Menu)
 }
