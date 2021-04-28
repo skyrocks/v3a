@@ -204,7 +204,6 @@ export default defineComponent({
       state.loading = false
       if (resp.success) {
         setToken(resp.data)
-        await store.dispatch('auth/getProfile')
         router.push({ path: (route.query.redirect || '/') as string })
       } else {
         message.error(resp.message)

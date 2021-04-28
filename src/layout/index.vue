@@ -1,33 +1,31 @@
 <template>
-  <Layout class="layout">
-    <Sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+  <a-layout class="layout">
+    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
       <LayoutSider :collapsed="collapsed" />
-    </Sider>
-    <Layout>
-      <Header class="header">
+    </a-layout-sider>
+    <a-layout>
+      <a-layout-header class="header">
         <LayoutHeader v-model:collapsed="collapsed" />
-      </Header>
-      <Content class="content">
+      </a-layout-header>
+      <a-layout-content class="content">
         <LayoutContent />
-      </Content>
-    </Layout>
-  </Layout>
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { Layout } from 'ant-design-vue'
-import LayoutSider from './Sider.vue'
+import LayoutSider from './sider/index.vue'
 import LayoutHeader from './Header.vue'
 import LayoutContent from './Content.vue'
 
-const { Header, Sider, Content } = Layout
-
 export default defineComponent({
   components: {
-    Layout,
-    Header,
-    Sider,
-    Content,
+    [Layout.name]: Layout,
+    [Layout.Header.name]: Layout.Header,
+    [Layout.Sider.name]: Layout.Sider,
+    [Layout.Content.name]: Layout.Content,
 
     LayoutSider,
     LayoutHeader,

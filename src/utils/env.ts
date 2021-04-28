@@ -1,6 +1,6 @@
 export default process.env
 
-export const API_BASE = process.env.VUE_APP_API_DOMAIN as string
+export const API_BASE = process.env.VUE_APP_API_BASE as string
 
 // export const BASE_URL = import.meta.env.BASE_URL as string
 
