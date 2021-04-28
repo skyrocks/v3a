@@ -1,24 +1,9 @@
-# client
+# v3a
 
-## Project setup
-```
-yarn install
-```
+一个Vue3项目, 基于Antd实现, Webpack构建, 作为xt脚手架的模版使用
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 功能
+1、Antd懒加载, 
+2、创建动态路由, 动态菜单, 路由守卫
+3、阿里图标组件
+4、.env环境切换
