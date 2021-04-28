@@ -2,12 +2,10 @@ import { menuApi } from '@/api/modules/menu'
 
 interface StateType {
   menus: any[]
-  routes: any[]
 }
 
 const state = (): StateType => ({
-  menus: [],
-  routes: []
+  menus: []
 })
 
 const actions = {
@@ -24,9 +22,6 @@ const actions = {
           reject(error)
         })
     })
-  },
-  saveRoutes({ commit }: any, routes: any) {
-    commit('SET_ROUTES', routes)
   }
 }
 
@@ -44,15 +39,11 @@ const mutations = {
       funcKeys: '',
       children: []
     })
-  },
-  SET_ROUTES: (state: any, routes: any) => {
-    state.routes = routes
   }
 }
 
 const getters = {
-  menus: (state: StateType) => state.menus,
-  routes: (state: StateType) => state.routes
+  menus: (state: StateType) => state.menus
 }
 
 export default {

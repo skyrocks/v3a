@@ -1,6 +1,7 @@
 {
-  "name": "parrot-client",
+  "name": "v3a",
   "version": "0.1.0",
+  "description": "Vue3 Antd框架 Webpack构建, xt脚手架的模版",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
