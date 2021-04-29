@@ -15,7 +15,6 @@ import { useRoute } from 'vue-router'
 export default defineComponent({
   setup() {
     const currentRoute = useRoute()
-    console.log(currentRoute)
     return {
       currentRoute
     }

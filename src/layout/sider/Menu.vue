@@ -33,9 +33,18 @@ export default defineComponent({
       }
     )
 
+    // // 跟随页面路由变化，切换菜单选中状态
+    // watch(
+    //   () => currentRoute.fullPath,
+    //   () => {
+    //     if (currentRoute.name == 'login' || props.collapsed) return
+    //     state.openKeys = getOpenKeys()
+    //     state.selectedKeys = [currentRoute.name]
+    //   }
+    // )
+
     // 点击菜单
     const clickMenuItem = ({ key }: any) => {
-      console.log(key)
       router.push({ name: key })
     }
 

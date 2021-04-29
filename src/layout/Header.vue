@@ -5,6 +5,13 @@
         <menu-unfold-outlined v-if="collapsed" />
         <menu-fold-outlined v-else />
       </span>
+      <a-breadcrumb>
+        <template v-for="item in state.breadcrumb" :key="item">
+          <a-breadcrumb-item>
+            {{ item }}
+          </a-breadcrumb-item>
+        </template>
+      </a-breadcrumb>
     </div>
     <div class="right-options">
       <span>bar</span>
@@ -31,13 +38,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, reactive, ref, watch } from 'vue'
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, PoweroffOutlined } from '@ant-design/icons-vue'
-import { Avatar, Dropdown } from 'ant-design-vue'
-import { useRouter } from 'vue-router'
+import { Avatar, Dropdown, Breadcrumb } from 'ant-design-vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { confirm } from '@/plugins/index'
 import { userApi } from '@/api/modules/user'
+import { treeFindParent } from '@/utils/index'
 
 export default defineComponent({
   components: {
@@ -46,6 +54,8 @@ export default defineComponent({
     UserOutlined,
     PoweroffOutlined,
 
+    [Breadcrumb.name]: Breadcrumb,
+    [Breadcrumb.Item.name]: Breadcrumb.Item,
     [Avatar.name]: Avatar,
     Dropdown
   },
@@ -84,7 +94,28 @@ export default defineComponent({
       })
     }
 
+    const state = reactive<{
+      breadcrumb: any[]
+    }>({
+      breadcrumb: []
+    })
+    const currentRoute = useRoute()
+
+    // 跟随页面路由变化，设置面包屑
+    watch(
+      () => currentRoute.fullPath,
+      () => {
+        state.breadcrumb = treeFindParent(
+          store.getters['menu/menus'],
+          (data: any) => data.menuId === currentRoute.name,
+          'menuName'
+        )
+      }
+    )
+
     return {
+      state,
+
       photoUrl,
       userName,
 

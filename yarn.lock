@@ -6365,6 +6365,11 @@ npm-run-path@^4.0.0:
   dependencies:
     path-key "^3.0.0"
 
+nprogress@^1.0.0-1:
+  version "1.0.0-1"
+  resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-1.0.0-1.tgz#dd4cce2b951f9359028facd6c51cc9c49ecfa1a2"
+  integrity sha512-Gr/Km0nIMbR7hOB0fjGx7nR0oRjTy9M61dXiQL5bfTBq0cQ+hNgt6gxE062j7Bxm+L/IjNVOr41iu2hrDeuedw==
+
 nth-check@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/nth-check/download/nth-check-1.0.2.tgz?cache=0&sync_timestamp=1606860731740&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnth-check%2Fdownload%2Fnth-check-1.0.2.tgz#b2bd295c37e3dd58a3bf0700376663ba4d9cf05c"

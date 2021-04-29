@@ -48,3 +48,18 @@ export function listSore(list: any[], originIndex: number, targetIndex: number) 
 export function cloneObject(obj: any) {
   return JSON.parse(JSON.stringify(obj))
 }
+
+export function treeFindParent(tree: any[], func: (data: any) => boolean, label: string, path: any[] = []) {
+  if (!tree) return []
+  for (const data of tree) {
+    // 这里按照你的需求来存放最后返回的内容吧
+    path.push(data[label])
+    if (func(data)) return path
+    if (data.children) {
+      const findChildren: any[] = treeFindParent(data.children, func, label, path)
+      if (findChildren.length) return findChildren
+    }
+    path.pop()
+  }
+  return []
+}
