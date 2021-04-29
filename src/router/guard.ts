@@ -8,22 +8,29 @@ const whiteList = ['/login', '/404']
 
 export const createGuard = (router: Router) => {
   router.beforeEach(async to => {
+    console.log('beforeEach -1')
     const hasToken = getToken()
     if (hasToken) {
+      console.log('beforeEach 0')
       if (store.getters.user) {
-        // console.log('beforeEach 1')
+        console.log('beforeEach 1')
         // console.log(store.getters.user)
         // 没有return, 等于next()
       } else {
         //虽然有token, 但是没有登录用户, 先获取用户
-        // console.log('beforeEach 2')
+        console.log('beforeEach 2')
         // console.log(store.getters.user)
+
+        console.log('await auth/getProfile 0')
         await store.dispatch('auth/getProfile')
+        console.log('await auth/getProfile 1')
         // console.log(store.getters.user)
         if (store.getters.user) {
           // console.log('beforeEach 3')
           // console.log(store.getters.user)
+          console.log('await auth/findAuthMenu 0')
           await store.dispatch('menu/findAuthMenu')
+          console.log('await auth/findAuthMenu 1')
           // 创建动态路由,首页的菜单也是基于此路由构建
           addDynamicRoute()
           // 没有return, 等于next()
@@ -41,7 +48,7 @@ export const createGuard = (router: Router) => {
       }
       // NProgress.done()
     } else {
-      // console.log('beforeEach 5')
+      console.log('beforeEach 5')
       if (whiteList.indexOf(to.path) === -1) {
         return `/login?redirect=${to.path}`
       }

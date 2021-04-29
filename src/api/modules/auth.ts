@@ -13,6 +13,9 @@ class Auth extends Abstract {
   loginSms(data: any) {
     return this.post({ url: '/auth/sms/login', data })
   }
+  logout(loginName: string) {
+    return this.post({ url: `/auth/logout/${loginName}` })
+  }
 }
 
 // 单列模式返回对象

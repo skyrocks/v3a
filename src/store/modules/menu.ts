@@ -9,24 +9,20 @@ const state = (): StateType => ({
 })
 
 const actions = {
-  findAuthMenu({ commit }: any) {
-    return new Promise((resolve, reject) => {
-      menuApi
-        .getAuthMenu()
-        .then((resp: any) => {
-          const { data } = resp
-          commit('SET_MENUS', data)
-          resolve(data)
-        })
-        .catch((error: any) => {
-          reject(error)
-        })
+  findAuthMenu: async ({ commit }: any) => {
+    console.log('findAuthMenu 0')
+    await menuApi.getAuthMenu().then((resp: any) => {
+      console.log('findAuthMenu 1')
+      const { data } = resp
+      commit('SET_MENUS', data)
     })
+    console.log('findAuthMenu 2')
   }
 }
 
 const mutations = {
   SET_MENUS: (state: any, menus: any) => {
+    console.log('SET_MENUS 0')
     state.menus = menus
     state.menus.unshift({
       menuId: 'dashboard',
@@ -39,6 +35,7 @@ const mutations = {
       funcKeys: '',
       children: []
     })
+    console.log('SET_MENUS 1')
   }
 }
 

@@ -122,7 +122,6 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useStore } from 'vuex'
 import { API_BASE } from '@/utils/env'
 import { message, Tooltip, Image } from 'ant-design-vue'
 import { setToken } from '@/utils/token'
@@ -158,7 +157,6 @@ export default defineComponent({
     const disabledLoginSmsBtn = computed(() => !(state.sms.cellphone !== '' && state.sms.code !== ''))
     const disabledSendSmsCodeBtn = computed(() => !(state.sms.cellphone !== '' && !state.waiting))
 
-    const store = useStore()
     const router = useRouter()
     const route = useRoute()
 

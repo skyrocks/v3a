@@ -1,6 +1,6 @@
 # v3a
 
-一个Vue3项目, 基于Antd实现, Webpack构建, 作为xt脚手架的模版使用
+一个Vue3项目, 基于Antd实现, Webpack构建, 作为xxt脚手架的模版使用
 
 ### 功能
 1、Antd懒加载, 

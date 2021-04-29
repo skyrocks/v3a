@@ -4,6 +4,13 @@ class User extends Abstract {
   getUser(params: {}) {
     return this.get({ url: '/users/0/5', params })
   }
+
+  browserPhoto(userId: string) {
+    return this.get({
+      url: `/users/photo/${userId}`,
+      responseType: 'blob'
+    })
+  }
 }
 
 // 单列模式返回对象
