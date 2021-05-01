@@ -16,7 +16,7 @@
     <div class="right-options">
       <span>bar</span>
       <span>{{ photoUrl }} {{ userName }}</span>
-      <Dropdown>
+      <a-dropdown>
         <a-avatar v-if="photoUrl !== ''" :src="photoUrl" :alt="userName"></a-avatar>
         <a-avatar v-else>
           {{ userName }}
@@ -32,7 +32,7 @@
             </a-menu-item>
           </a-menu>
         </template>
-      </Dropdown>
+      </a-dropdown>
     </div>
   </div>
 </template>
@@ -40,24 +40,19 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive, ref, watch } from 'vue'
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, PoweroffOutlined } from '@ant-design/icons-vue'
-import { Avatar, Dropdown, Breadcrumb } from 'ant-design-vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { confirm } from '@/plugins/index'
 import { userApi } from '@/api/modules/user'
 import { treeFindParent } from '@/utils/index'
+import { Menu } from '@/store/type'
 
 export default defineComponent({
   components: {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     UserOutlined,
-    PoweroffOutlined,
-
-    [Breadcrumb.name]: Breadcrumb,
-    [Breadcrumb.Item.name]: Breadcrumb.Item,
-    [Avatar.name]: Avatar,
-    Dropdown
+    PoweroffOutlined
   },
   emits: ['update:collapsed'],
   setup(props, { emit }) {
@@ -76,7 +71,7 @@ export default defineComponent({
     })
 
     const getPhoto = () => {
-      userApi.browserPhoto(store.getters.user.userId).then((resp: any) => {
+      userApi.browserPhoto(store.getters.user.userId).then(resp => {
         photoUrl.value = URL.createObjectURL(new Blob([resp.origin]))
       })
     }
@@ -95,7 +90,7 @@ export default defineComponent({
     }
 
     const state = reactive<{
-      breadcrumb: any[]
+      breadcrumb: string[]
     }>({
       breadcrumb: []
     })
@@ -107,7 +102,7 @@ export default defineComponent({
       () => {
         state.breadcrumb = treeFindParent(
           store.getters['menu/menus'],
-          (data: any) => data.menuId === currentRoute.name,
+          (data: Menu) => data.menuId === currentRoute.name,
           'menuName'
         )
       }

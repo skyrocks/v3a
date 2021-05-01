@@ -2,6 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 import { errorRoutes } from './error'
 import router from '.'
 import store from '@/store'
+import { Menu } from '@/store/type'
 import Layout from '@/layout/index.vue'
 
 const addDynamicRoute = () => {
@@ -12,7 +13,7 @@ const addDynamicRoute = () => {
   })
 }
 
-const createDynamicRoute = (data: any[]) => {
+const createDynamicRoute = (data: Menu[]) => {
   const homeRoute: RouteRecordRaw = {
     path: '/',
     name: 'Home',
@@ -25,7 +26,7 @@ const createDynamicRoute = (data: any[]) => {
   return homeRoute
 }
 
-const createRouteList = (data: any[], parentPath: string): RouteRecordRaw[] => {
+const createRouteList = (data: Menu[], parentPath: string): RouteRecordRaw[] => {
   const menus: Array<RouteRecordRaw> = []
 
   data.forEach(ele => {

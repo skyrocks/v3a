@@ -25,7 +25,7 @@ export interface CustomResponse {
   readonly status: number
   readonly statusText: string
   readonly success: boolean
-  readonly message?: string
+  readonly message: string
   data: any
-  origin?: any
+  origin: any
 }

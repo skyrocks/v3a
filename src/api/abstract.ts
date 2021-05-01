@@ -41,7 +41,8 @@ class Abstract {
               statusText: resp.statusText,
               origin: resp.data,
               success: false,
-              data: null
+              message: '',
+              data: undefined
             })
           }
         })
@@ -51,9 +52,10 @@ class Abstract {
           reject({
             status: 0,
             statusText: err?.data?.errorMessage || err?.message,
-            origin: null,
+            origin: undefined,
             success: false,
-            data: null
+            message: '',
+            data: undefined
           })
         })
     })

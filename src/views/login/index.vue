@@ -128,10 +128,12 @@ import { setToken } from '@/utils/token'
 import { v4 as uuidv4 } from 'uuid'
 import { UserOutlined, LockOutlined, PhoneOutlined, CodeOutlined } from '@ant-design/icons-vue'
 import { authApi } from '@/api/modules/auth'
+import { CustomResponse } from '@/api/types'
 
 export default defineComponent({
   components: { UserOutlined, LockOutlined, PhoneOutlined, CodeOutlined, [Tooltip.name]: Tooltip, [Image.name]: Image },
   setup() {
+    // 定义所有响应式变量
     const state = reactive({
       loginType: 0,
       form: {
@@ -151,6 +153,7 @@ export default defineComponent({
       waitText: ''
     })
 
+    // 定义页面按照状态变量
     const disabledLoginPwdBtn = computed(
       () => !(state.form.loginName !== '' && state.form.password !== '' && state.form.captcha !== '')
     )
@@ -187,7 +190,7 @@ export default defineComponent({
           message.error('手机号码不合法')
         } else {
           state.sms.id = uuidv4()
-          authApi.sendSmsCode(state.sms.id, state.sms.cellphone).then((resp: any) => {
+          authApi.sendSmsCode(state.sms).then(resp => {
             if (!resp.success) {
               message.error(resp.message)
             } else {
@@ -198,7 +201,8 @@ export default defineComponent({
       }
     }
 
-    const loginCallback = async (resp: any) => {
+    // 登录成功后的反馈函数
+    const loginCallback = (resp: CustomResponse) => {
       state.loading = false
       if (resp.success) {
         setToken(resp.data)
@@ -208,7 +212,7 @@ export default defineComponent({
       }
     }
 
-    const stateTime = reactive<{ intervalId: any; lastTime: number }>({ intervalId: undefined, lastTime: 60 })
+    const stateTime = reactive<{ intervalId: number; lastTime: number }>({ intervalId: 0, lastTime: 60 })
     const waitSmsCode = () => {
       state.waiting = true
       state.waitText = '60s后获取'
@@ -217,7 +221,7 @@ export default defineComponent({
         stateTime.lastTime--
         if (stateTime.lastTime <= 0) {
           clearInterval(stateTime.intervalId) // 清除计时器
-          stateTime.intervalId = undefined // 设置为null
+          stateTime.intervalId = 0 // 设置为null
           stateTime.lastTime = 60
           state.waiting = false
         }

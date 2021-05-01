@@ -1,15 +1,34 @@
+/**
+ * 数字转换成英文字母
+ * @param num
+ * @returns
+ */
 export function num2col(num: number): string {
   return String.fromCharCode(64 + num)
 }
 
+/**
+ * 获取App高度
+ * @returns
+ */
 export function getAppHeight() {
   return document.documentElement.clientHeight
 }
 
-export function getContextHeight() {
-  return document.documentElement.clientHeight - 60
+/**
+ * 获取Content高度
+ * @returns
+ */
+export function getContentHeight() {
+  return document.documentElement.clientHeight - 64
 }
 
+/**
+ * list重新排序
+ * @param list
+ * @param originIndex 源索引位置
+ * @param targetIndex 目标索引位置
+ */
 export function listSore(list: any[], originIndex: number, targetIndex: number) {
   if (targetIndex >= 0 && targetIndex <= list.length) {
     if (originIndex < targetIndex) {
@@ -45,10 +64,23 @@ export function listSore(list: any[], originIndex: number, targetIndex: number) 
   }
 }
 
+/**
+ * 深度克隆对象
+ * @param obj
+ * @returns
+ */
 export function cloneObject(obj: any) {
   return JSON.parse(JSON.stringify(obj))
 }
 
+/**
+ * 向上递归所有父级
+ * @param tree 数据数组
+ * @param func 满足条件的函数
+ * @param label 输出的值标签
+ * @param path 输入集合
+ * @returns
+ */
 export function treeFindParent(tree: any[], func: (data: any) => boolean, label: string, path: any[] = []) {
   if (!tree) return []
   for (const data of tree) {

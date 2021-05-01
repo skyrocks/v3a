@@ -11,3 +11,14 @@ export interface User {
   userCode: string
   email: string
 }
+export interface Menu {
+  menuId: string
+  menuName: string
+  path: string
+  component: string
+  parentId: string
+  iconClass: string
+  hidden: number
+  funcKeys: string
+  children: Menu[]
+}

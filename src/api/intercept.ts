@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, Method } from 'axios'
-// import { ElLoading } from 'element-plus'
 
 // 定义挂起请求结构
 interface PendingType {
@@ -41,11 +40,6 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   request => {
-    // loading = ElLoading.service({
-    //   text: '加载中',
-    //   background: 'rgba(0, 0, 0, 0.3)'
-    // })
-
     removePending(request)
 
     request.cancelToken = new axios.CancelToken(c => {
@@ -62,13 +56,11 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
   response => {
-    // loading.close()
     removePending(response.config)
 
     return response
   },
   error => {
-    // loading.close()
     const response = error.response
 
     // 超时重新请求

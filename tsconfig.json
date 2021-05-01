@@ -32,8 +32,17 @@
     // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
     "allowSyntheticDefaultImports": true,
 
+    // 启用实验性的ES装饰器
+    "experimentalDecorators": true, 
+
     // 生成相应的 .map文件。
     "sourceMap": true,
+
+    // 允许 JavaScript 文件在你的工程中被引入，而不是仅仅允许 .ts 和 .tsx 文件
+    "allowJs": true,
+
+    // 与 allowJs 配合使用，当 checkJs 被启用时，JavaScript 文件中会报告错误
+    "checkJs": true,
 
     // 解析非相对模块名的基准目录
     "baseUrl": ".",

@@ -1,17 +1,18 @@
 import { authApi } from '@/api/modules/auth'
 import { User } from '../type'
 import { removeToken } from '@/utils/token'
+import { Commit } from 'vuex'
 
 interface StateType {
   user: User | undefined
 }
 
-const state = (): StateType => ({
+const state: StateType = {
   user: undefined
-})
+}
 
 const actions = {
-  getProfile: async (context: any) => {
+  getProfile: async (context: { commit: Commit }) => {
     await authApi.profile().then(resp => {
       if (resp.success) {
         context.commit('getProfile', resp.data)
@@ -19,12 +20,14 @@ const actions = {
     })
   },
 
-  logout: async (context: any) => {
-    await authApi.logout(context.state.user.loginName).then(resp => {
-      if (resp.success) {
-        context.commit('logout')
-      }
-    })
+  logout: async (context: { commit: Commit; state: StateType }) => {
+    if (context.state.user) {
+      await authApi.logout(context.state.user.loginName).then(resp => {
+        if (resp.success) {
+          context.commit('logout')
+        }
+      })
+    }
   }
 }
 

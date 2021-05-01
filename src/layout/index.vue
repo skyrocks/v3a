@@ -7,7 +7,7 @@
       <a-layout-header class="header">
         <LayoutHeader v-model:collapsed="collapsed" />
       </a-layout-header>
-      <a-layout-content class="content">
+      <a-layout-content class="layout-content">
         <LayoutContent />
       </a-layout-content>
     </a-layout>
@@ -15,18 +15,12 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { Layout } from 'ant-design-vue'
 import LayoutSider from './sider/index.vue'
 import LayoutHeader from './Header.vue'
 import LayoutContent from './Content.vue'
 
 export default defineComponent({
   components: {
-    [Layout.name]: Layout,
-    [Layout.Header.name]: Layout.Header,
-    [Layout.Sider.name]: Layout.Sider,
-    [Layout.Content.name]: Layout.Content,
-
     LayoutSider,
     LayoutHeader,
     LayoutContent
@@ -52,7 +46,7 @@ export default defineComponent({
     background: #fff;
     padding: 0;
   }
-  .content {
+  .layout-content {
     flex: none;
     margin: 24px 16px;
     padding: 24px;
