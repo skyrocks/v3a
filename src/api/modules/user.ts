@@ -1,24 +1,22 @@
-import Abstract from '../abstract'
+import { get } from '../request'
 
-class User extends Abstract {
-  getUser(params: {}) {
-    return this.get({ url: '/users/0/5', params })
-  }
+const ns = '/users' // namespace
 
-  browserPhoto(userId: string) {
-    return this.get({
-      url: `/users/photo/${userId}`,
+export const userApi = {
+  getUserAuth: (params: {}) => {
+    return get({ url: `${ns}/100/105`, params })
+  },
+  getUserPath: (params: {}) => {
+    return get({ url: `${ns}err/0/5`, params })
+  },
+  getUserInner: (params: {}) => {
+    return get({ url: `${ns}/0/5`, params })
+  },
+
+  browserPhoto: (userId: string) => {
+    return get({
+      url: `${ns}/photo/${userId}`,
       responseType: 'blob'
     })
   }
 }
-
-// 单列模式返回对象
-let instance
-const userApi = (() => {
-  if (instance) return instance
-  instance = new User()
-  return instance
-})()
-
-export { userApi }

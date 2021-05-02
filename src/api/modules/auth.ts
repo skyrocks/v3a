@@ -1,5 +1,4 @@
-import Abstract from '../abstract'
-
+import { get, post } from '../request'
 interface Pwd {
   loginName: string
   password: string
@@ -12,30 +11,25 @@ interface Sms {
   cellphone: string
 }
 
-class Auth extends Abstract {
-  login(data: Pwd) {
-    return this.post({ url: '/auth/login', data })
-  }
-  profile() {
-    return this.get({ url: '/auth/profile' })
-  }
-  sendSmsCode(data: Sms) {
-    return this.post({ url: '/auth/sms/code', data })
-  }
-  loginSms(data: Sms) {
-    return this.post({ url: '/auth/sms/login', data })
-  }
-  logout(loginName: string) {
-    return this.post({ url: `/auth/logout/${loginName}` })
+const ns = '/auth' // namespace
+
+export const authApi = {
+  login: (data: Pwd) => {
+    return post({ url: `${ns}/login`, data })
+  },
+  profile: () => {
+    return get({ url: `${ns}/profile` })
+  },
+  sendSmsCode: (data: Sms) => {
+    return post({ url: `${ns}/sms/code`, data })
+  },
+  loginSms: (data: Sms) => {
+    return post({ url: `${ns}/sms/login`, data })
+  },
+  logout: (loginName: string) => {
+    return post({ url: `${ns}/logout`, data: { loginName } })
+  },
+  refreshToken: (token: string) => {
+    return post({ url: `${ns}/refresh/token`, data: { token } })
   }
 }
-
-// 单列模式返回对象
-let instance
-const authApi = (() => {
-  if (instance) return instance
-  instance = new Auth()
-  return instance
-})()
-
-export { authApi }

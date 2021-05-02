@@ -1,3 +1,6 @@
+/**
+ * class模式,弃用
+ **/
 import { message } from 'ant-design-vue'
 import { API_BASE } from '@/utils/env'
 import { AxiosRequest, CustomResponse } from './types'
@@ -24,6 +27,7 @@ class Abstract {
       Authorization: `Bearer ${localStore.get('token')}`
     })
     return new Promise((resolve, reject) => {
+      console.log('abstract', instance)
       instance({ baseURL, headers, method, url, params, data, responseType })
         .then(resp => {
           if (resp.status === 200) {

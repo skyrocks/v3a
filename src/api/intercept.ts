@@ -36,7 +36,7 @@ const instance = axios.create({
   timeout: 180000,
   responseType: 'json'
 })
-// let loading: any
+
 // 添加请求拦截器
 instance.interceptors.request.use(
   request => {
@@ -62,7 +62,6 @@ instance.interceptors.response.use(
   },
   error => {
     const response = error.response
-
     // 超时重新请求
     const config = error.config
     // 全局的请求次数,请求的间隙
