@@ -3,10 +3,15 @@ import { Menu } from '../type'
 
 interface StateType {
   menus: Menu[]
+  menuIndex: {
+    // 以路menuId键值
+    [key: string]: Menu
+  }
 }
 
 const state: StateType = {
-  menus: []
+  menus: [],
+  menuIndex: {}
 }
 
 const actions = {
@@ -30,14 +35,18 @@ const mutations = {
       parentId: '',
       iconClass: 'iconzhuye',
       hidden: 0,
-      funcKeys: '',
+      funcKeys: 'add',
       children: []
+    })
+    state.menus.forEach(menu => {
+      state.menuIndex[menu.menuId] = menu
     })
   }
 }
 
 const getters = {
-  menus: (state: StateType) => state.menus
+  menus: (state: StateType) => state.menus,
+  menuIndex: (state: StateType) => state.menuIndex
 }
 
 export default {

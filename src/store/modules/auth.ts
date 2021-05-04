@@ -13,11 +13,16 @@ const state: StateType = {
 
 const actions = {
   getProfile: async (context: { commit: Commit }) => {
-    await authApi.profile().then(resp => {
-      if (resp.success) {
-        context.commit('getProfile', resp.data)
-      }
-    })
+    await authApi
+      .profile()
+      .then(resp => {
+        if (resp.success) {
+          context.commit('getProfile', resp.data)
+        }
+      })
+      .catch(() => {
+        context.commit('getProfile')
+      })
   },
 
   refreshToken: async (context: { commit: Commit }, token: string) => {

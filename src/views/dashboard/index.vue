@@ -1,16 +1,16 @@
 <template>
   <div>
-    <a-button type="primary">Primary</a-button>
+    <a-button type="primary" v-permission="{ action: 'add', effect: 'd' }">Primary</a-button>
     <a-button type="primary" @click="testErrorPathRequestHandle">测试地址错误的请求</a-button>
     <a-button type="primary" @click="testErrorAuthRequestHandle">测试认证错误的请求</a-button>
     <a-button type="primary" @click="testErrorInnerRequestHandle">测试内部错误的请求</a-button>
-    <a-button type="primary" @click="testSuccessRequestHandle">测试正确的请求</a-button>
+    <a-button type="primary" v-permission="'add'" @click="testSuccessRequestHandle">测试正确的请求</a-button>
     <divider />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, getCurrentInstance, inject } from 'vue'
 import { Divider, message } from 'ant-design-vue'
 import { userApi } from '@/api/modules/user'
 import { menuApi } from '@/api/modules/menu'
@@ -19,7 +19,17 @@ export default defineComponent({
   components: { Divider },
 
   setup() {
+    const { proxy } = getCurrentInstance() as any
+
+    const hasPermission = inject('$hasPermission') as any
+
     const testErrorPathRequestHandle = () => {
+      console.log(proxy.$hasPermission('add'))
+      console.log(proxy.$hasPermission('add', 'system'))
+
+      console.log('inject', hasPermission('add'))
+      console.log('inject', hasPermission('add', 'system'))
+      /*
       userApi.getUserPath({}).then(resp => {
         if (resp.success) {
           message.success('success')
@@ -27,6 +37,7 @@ export default defineComponent({
           message.error(`dashboard ${resp.message}`)
         }
       })
+      */
     }
     const testErrorAuthRequestHandle = () => {
       userApi.getUserAuth({}).then(resp => {
