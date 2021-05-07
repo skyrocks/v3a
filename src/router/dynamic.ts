@@ -40,7 +40,16 @@ const createRouteList = (data: Menu[], parentPath: string): RouteRecordRaw[] => 
       menus.push({
         path: path,
         name: ele.menuId,
-        component: () => Promise.resolve(require(`@/views/${ele.component}/index.vue`).default),
+        component: () =>
+          new Promise(resolve => {
+            try {
+              resolve(require(`@/views/${ele.component}/index.vue`).default)
+            } catch (err) {
+              console.error(err)
+              resolve(require('@/views/error/ErrComp.vue'))
+            }
+          }),
+        // component: () => Promise.resolve(require(`@/views/${ele.component}/index.vue`).default),
         meta: { title: ele.menuName, funcKeys: ele.funcKeys }
       })
     }

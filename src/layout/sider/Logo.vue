@@ -1,7 +1,7 @@
 <template>
   <div class="logo" :style="{ width: `${collapsed ? 80 : 200}px` }">
     <img src="~@/assets/images/logo.png" alt="" />
-    <h2 v-show="!collapsed" class="title">Vue3 Antd</h2>
+    <h2 v-show="!collapsed" class="title">{{ title }}</h2>
   </div>
 </template>
 
@@ -16,7 +16,10 @@ export default defineComponent({
     }
   },
   setup() {
-    return {}
+    const title = document.title
+    return {
+      title
+    }
   }
 })
 </script>

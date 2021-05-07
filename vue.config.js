@@ -1,5 +1,8 @@
 // const path = require('path')
 // const resolve = dir => path.join(__dirname, dir)
+
+const title = 'Vue3 Antd'
+
 module.exports = {
   publicPath: process.env.BASE_URL,
   outputDir: process.env.VUE_OUTPUT_DIR,
@@ -14,6 +17,13 @@ module.exports = {
         javascriptEnabled: true
       }
     }
+  },
+
+  chainWebpack: config => {
+    config.plugin('html').tap(args => {
+      args[0].title = title
+      return args
+    })
   },
 
   devServer: {

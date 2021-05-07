@@ -59,7 +59,9 @@ export const createGuard = (router: Router) => {
   })
 
   router.afterEach(to => {
-    logRoute(to)
+    if (!whiteList.includes(to.path)) {
+      logRoute(to)
+    }
     NProgress.done()
   })
 }

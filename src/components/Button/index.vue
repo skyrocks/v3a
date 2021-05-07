@@ -12,9 +12,8 @@
 </template>
 
 <script lang="ts">
-import { onUnmounted, ref } from 'vue'
 import { Button } from 'ant-design-vue'
-import { PropType, defineComponent, onMounted } from 'vue'
+import { PropType, defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { ButtonType } from 'ant-design-vue/lib/button/buttonTypes'
 import { logAction } from '@/utils/log'
 
