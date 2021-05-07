@@ -5,6 +5,7 @@
     <div>path {{ currentRoute.path }}</div>
     <div>fullPath {{ currentRoute.fullPath }}</div>
     <div>meta {{ currentRoute.meta }}</div>
+    <x-button type="warning" @click="clickHandler" :log="true">ab click</x-button>
   </div>
 </template>
 
@@ -15,8 +16,13 @@ import { useRoute } from 'vue-router'
 export default defineComponent({
   setup() {
     const currentRoute = useRoute()
+
+    const clickHandler = () => {
+      console.log('about page')
+    }
     return {
-      currentRoute
+      currentRoute,
+      clickHandler
     }
   }
 })

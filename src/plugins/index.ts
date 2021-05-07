@@ -1,4 +1,5 @@
 export { setupAntd } from './antd'
+export { setupCustomComponents } from './customComponents'
 export { installProviders } from './providers'
 export { setupDirectives } from './directives'
 export { confirm } from './confirm'

@@ -6,7 +6,6 @@ export const permission: ObjectDirective = {
     if (binding.value == undefined) return
 
     const val = binding.value
-    console.log(typeof val)
     let { action, effect } = { action: '', effect: '' }
     if (typeof val === 'string') {
       action = val

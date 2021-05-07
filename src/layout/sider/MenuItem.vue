@@ -1,6 +1,6 @@
 <template>
   <template v-if="menuInfo.hidden == 0">
-    <a-sub-menu v-if="menuInfo.children.length > 0" :key="menuInfo.menuId">
+    <a-sub-menu v-if="menuInfo.children.length > 0" :key="menuInfo.menuId" v-bind="$attrs">
       <template #title>
         <span>
           <al-icon :type="menuInfo.iconClass" v-if="menuInfo.iconClass" />

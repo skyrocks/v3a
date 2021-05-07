@@ -5,6 +5,7 @@
     <a-button type="primary" @click="testErrorAuthRequestHandle">测试认证错误的请求</a-button>
     <a-button type="primary" @click="testErrorInnerRequestHandle">测试内部错误的请求</a-button>
     <a-button type="primary" v-permission="'add'" @click="testSuccessRequestHandle">测试正确的请求</a-button>
+    <x-button type="success" @click="testXButtonHandler">自定义组件</x-button>
     <divider />
   </div>
 </template>
@@ -14,6 +15,7 @@ import { defineComponent, getCurrentInstance, inject } from 'vue'
 import { Divider, message } from 'ant-design-vue'
 import { userApi } from '@/api/modules/user'
 import { menuApi } from '@/api/modules/menu'
+import { logAction } from '@/utils/log'
 
 export default defineComponent({
   components: { Divider },
@@ -57,7 +59,9 @@ export default defineComponent({
         }
       })
     }
+
     const testSuccessRequestHandle = () => {
+      logAction('测试正确的请求')
       menuApi.getAuthMenu().then(resp => {
         if (resp.success) {
           message.success('success')
@@ -66,11 +70,17 @@ export default defineComponent({
         }
       })
     }
+
+    const testXButtonHandler = () => {
+      console.log('testXButtonHandler')
+    }
+
     return {
       testErrorPathRequestHandle,
       testErrorAuthRequestHandle,
       testErrorInnerRequestHandle,
-      testSuccessRequestHandle
+      testSuccessRequestHandle,
+      testXButtonHandler
     }
   }
 })

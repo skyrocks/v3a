@@ -4,6 +4,7 @@ import { getToken, removeToken } from '@/utils/token'
 import { addDynamicRoute } from './dynamic'
 import 'nprogress/css/nprogress.css' // 进度条样式
 import NProgress from 'nprogress'
+import { logRoute } from '@/utils/log'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -57,7 +58,8 @@ export const createGuard = (router: Router) => {
     }
   })
 
-  router.afterEach(() => {
+  router.afterEach(to => {
+    logRoute(to)
     NProgress.done()
   })
 }

@@ -9,12 +9,13 @@ module.exports = {
     loaderOptions: {
       scss: {
         prependData: '@import "@/styles/variables.scss"; @import "@/styles/index.scss";'
+      },
+      less: {
+        javascriptEnabled: true
       }
-      // less: {
-      //   javascriptEnabled: true
-      // }
     }
   },
+
   devServer: {
     port: 8888,
     open: true,
