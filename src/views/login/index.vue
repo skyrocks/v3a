@@ -122,9 +122,8 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { API_BASE } from '@/utils/env'
 import { message, Tooltip, Image } from 'ant-design-vue'
-import { setToken } from '@/utils/token'
+import { env, token } from '@/utils'
 import { v4 as uuidv4 } from 'uuid'
 import { UserOutlined, LockOutlined, PhoneOutlined, CodeOutlined } from '@ant-design/icons-vue'
 import { authApi } from '@/api/modules/auth'
@@ -165,7 +164,7 @@ export default defineComponent({
 
     const handleRefreshCaptcha = () => {
       state.form.captchaId = uuidv4()
-      state.captchaUrl = `${API_BASE}/auth/captcha/${state.form.captchaId}`
+      state.captchaUrl = `${env.API_BASE}/auth/captcha/${state.form.captchaId}`
     }
     const handlePwdLogin = () => {
       if (state.form.loginName !== '' && state.form.password != '' && state.form.captcha != '') {
@@ -205,7 +204,7 @@ export default defineComponent({
     const loginCallback = (resp: CustomResponse) => {
       state.loading = false
       if (resp.success) {
-        setToken(resp.data)
+        token.set(resp.data)
         router.push({ path: (route.query.redirect || '/') as string })
       } else {
         message.error(resp.message)

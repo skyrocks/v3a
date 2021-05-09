@@ -1,6 +1,6 @@
 import { authApi } from '@/api/modules/auth'
 import { User } from '../type'
-import { removeToken, setToken } from '@/utils/token'
+import { token as t } from '@/utils'
 import { Commit } from 'vuex'
 
 interface StateType {
@@ -26,7 +26,7 @@ const actions = {
   },
 
   refreshToken: async (context: { commit: Commit }, token: string) => {
-    removeToken()
+    t.remove()
     await authApi.refreshToken(token).then(resp => {
       if (resp.success) {
         context.commit('refreshToken', resp.data)
@@ -51,12 +51,12 @@ const mutations = {
   },
 
   refreshToken: (state: StateType, payload: string) => {
-    setToken(payload)
+    t.set(payload)
   },
 
   logout: (state: StateType) => {
     state.user = undefined
-    removeToken()
+    t.remove()
   }
 }
 

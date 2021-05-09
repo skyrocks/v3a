@@ -1,5 +1,5 @@
 import { ObjectDirective } from 'vue'
-import { hasPermission } from '@/utils/permission'
+import { permission as p } from '@/utils'
 
 export const permission: ObjectDirective = {
   mounted(el: HTMLButtonElement, binding) {
@@ -18,7 +18,7 @@ export const permission: ObjectDirective = {
     if (action == undefined) {
       return
     }
-    if (!hasPermission(action)) {
+    if (!p.has(action)) {
       if (effect == 'disabled') {
         el.disabled = true
         el.setAttribute('title', '没有权限')

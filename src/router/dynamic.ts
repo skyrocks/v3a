@@ -4,6 +4,7 @@ import router from '.'
 import store from '@/store'
 import { Menu } from '@/store/type'
 import Layout from '@/layout/index.vue'
+import { _ } from '@/utils'
 
 const addDynamicRoute = () => {
   router.addRoute(createDynamicRoute(store.getters['menu/menus']))
@@ -43,7 +44,7 @@ const createRouteList = (data: Menu[], parentPath: string): RouteRecordRaw[] => 
         component: () =>
           new Promise(resolve => {
             try {
-              resolve(require(`@/views/${ele.component}/index.vue`).default)
+              resolve(require(`@/views/${_.camelCase(ele.component)}/index.vue`).default)
             } catch (err) {
               console.error(err)
               resolve(require('@/views/error/ErrComp.vue'))

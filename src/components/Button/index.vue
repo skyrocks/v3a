@@ -15,7 +15,7 @@
 import { Button } from 'ant-design-vue'
 import { PropType, defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { ButtonType } from 'ant-design-vue/lib/button/buttonTypes'
-import { logAction } from '@/utils/log'
+import { log } from '@/utils'
 
 const buttonTypes = ['default', 'primary', 'ghost', 'dashed', 'danger', 'link']
 
@@ -39,7 +39,7 @@ export default defineComponent({
     const clickHandler = () => {
       if (props.log) {
         const text = btn.value.$el.innerText
-        logAction(text)
+        log.action(text)
       }
     }
 

@@ -1,5 +1,5 @@
 import { message } from 'ant-design-vue'
-import { API_BASE } from '@/utils/env'
+import { env } from '@/utils'
 import { AxiosRequest, CustomResponse } from './types'
 import { localStore } from '@/utils/storage'
 import instance from './intercept'
@@ -14,7 +14,7 @@ const getToken = () => {
 }
 
 const request = ({
-  baseURL = API_BASE,
+  baseURL = env.API_BASE,
   headers = headersDefault,
   method,
   url,

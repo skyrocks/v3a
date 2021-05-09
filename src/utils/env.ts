@@ -1,6 +1,6 @@
-export default process.env
+const env = process.env
 
-export const API_BASE = process.env.VUE_APP_API_BASE as string
+env.API_BASE = process.env.VUE_APP_API_BASE as string
 
 // export const BASE_URL = import.meta.env.BASE_URL as string
 
@@ -12,3 +12,5 @@ export const API_BASE = process.env.VUE_APP_API_BASE as string
 
 // const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 // const IS_DEV = ['development'].includes(process.env.NODE_ENV)
+
+export { env }

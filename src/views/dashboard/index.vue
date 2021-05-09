@@ -15,7 +15,7 @@ import { defineComponent, getCurrentInstance, inject } from 'vue'
 import { Divider, message } from 'ant-design-vue'
 import { userApi } from '@/api/modules/user'
 import { menuApi } from '@/api/modules/menu'
-import { logAction } from '@/utils/log'
+import { log } from '@/utils'
 
 export default defineComponent({
   components: { Divider },
@@ -61,7 +61,7 @@ export default defineComponent({
     }
 
     const testSuccessRequestHandle = () => {
-      logAction('测试正确的请求')
+      log.action('测试正确的请求')
       menuApi.getAuthMenu().then(resp => {
         if (resp.success) {
           message.success('success')

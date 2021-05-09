@@ -1,13 +1,15 @@
 import { localStore } from '@/utils/storage'
 
-export function getToken() {
-  return localStore.get('token')
-}
+export const token = {
+  get() {
+    return localStore.get('token')
+  },
 
-export function setToken(token: string) {
-  localStore.set('token', token)
-}
+  set(token: string) {
+    localStore.set('token', token)
+  },
 
-export function removeToken() {
-  localStore.remove('token')
+  remove() {
+    localStore.remove('token')
+  }
 }

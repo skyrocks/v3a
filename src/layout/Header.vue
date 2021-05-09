@@ -42,9 +42,9 @@ import { computed, defineComponent, onMounted, reactive, ref, watch } from 'vue'
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, PoweroffOutlined } from '@ant-design/icons-vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import { confirm } from '@/plugins/index'
+import { confirm } from '@/plugins'
 import { userApi } from '@/api/modules/user'
-import { treeFindParent } from '@/utils/index'
+import { util } from '@/utils'
 import { Menu } from '@/store/type'
 
 export default defineComponent({
@@ -100,7 +100,7 @@ export default defineComponent({
     watch(
       () => currentRoute.fullPath,
       () => {
-        state.breadcrumb = treeFindParent(
+        state.breadcrumb = util.treeFindParent(
           store.getters['menu/menus'],
           (data: Menu) => data.menuId === currentRoute.name,
           'menuName'

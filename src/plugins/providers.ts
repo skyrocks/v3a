@@ -1,4 +1,4 @@
-import { hasPermission } from '@/utils/permission'
+import { permission } from '@/utils'
 import { App } from 'vue'
 
 /**
@@ -7,8 +7,8 @@ import { App } from 'vue'
  */
 export const installProviders = (app: App) => {
   // 方法一: 用 provider 也行
-  app.provide('$hasPermission', hasPermission)
+  app.provide('$hasPermission', permission.has)
 
   // 方法二: 在getCurrentInstance()上挂载一个贯穿方法，
-  app.config.globalProperties.$hasPermission = hasPermission
+  app.config.globalProperties.$hasPermission = permission.has
 }

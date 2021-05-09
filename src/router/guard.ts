@@ -1,10 +1,9 @@
 import { Router } from 'vue-router'
 import store from '@/store'
-import { getToken, removeToken } from '@/utils/token'
+import { token as t, log } from '@/utils'
 import { addDynamicRoute } from './dynamic'
 import 'nprogress/css/nprogress.css' // 进度条样式
 import NProgress from 'nprogress'
-import { logRoute } from '@/utils/log'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -15,7 +14,7 @@ const whiteList = ['/login', '/404'] // 不需要token的白名单
 export const createGuard = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
     NProgress.start()
-    const token = getToken()
+    const token = t.get()
     if (token) {
       if (to.path === loginPath) {
         // 有token, 不可重复登录，跳回主页
@@ -40,7 +39,7 @@ export const createGuard = (router: Router) => {
             next({ ...to, replace: true })
           } else {
             // 有token, 获取登录用户失败, 可能是token失效, 跳回登录页
-            removeToken()
+            t.remove()
             next({ path: loginPath, query: { redirect: to.fullPath }, replace: true })
             NProgress.done()
           }
@@ -60,7 +59,7 @@ export const createGuard = (router: Router) => {
 
   router.afterEach(to => {
     if (!whiteList.includes(to.path)) {
-      logRoute(to)
+      log.route(to)
     }
     NProgress.done()
   })
