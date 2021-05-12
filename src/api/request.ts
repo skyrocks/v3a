@@ -13,15 +13,10 @@ const getToken = () => {
   return `Bearer ${localStore.get('token')}`
 }
 
-const request = ({
-  baseURL = env.API_BASE,
-  headers = headersDefault,
-  method,
-  url,
-  data,
-  params,
-  responseType
-}: AxiosRequest): Promise<CustomResponse> => {
+const request = (
+  { baseURL = env.API_BASE, headers = headersDefault, method, url, data, params, responseType }: AxiosRequest,
+  alterErr = true
+): Promise<CustomResponse> => {
   return new Promise((resolve, reject) => {
     Object.assign(headers, {
       Authorization: getToken()
@@ -53,7 +48,6 @@ const request = ({
         } else {
           // 错误范围
           const msg = resp.data?.message || url + '请求失败'
-          message.error(msg)
           const result = {
             status: resp.status,
             statusText: resp.statusText,
@@ -61,6 +55,9 @@ const request = ({
             success: false,
             message: msg,
             data: resp.data?.data
+          }
+          if (alterErr) {
+            message.error(msg)
           }
           reject(result)
         }
@@ -86,12 +83,18 @@ const tryRequest = async (err: any) => {
   return resp
 }
 
-const get = ({ baseURL, headers, url, data, params, responseType }: AxiosRequest): Promise<CustomResponse> => {
-  return request({ baseURL, headers, method: 'get', url, data, params, responseType })
+const get = (
+  { baseURL, headers, url, data, params, responseType }: AxiosRequest,
+  alterErr = true
+): Promise<CustomResponse> => {
+  return request({ baseURL, headers, method: 'get', url, data, params, responseType }, alterErr)
 }
 
-const post = ({ baseURL, headers, url, data, params, responseType }: AxiosRequest): Promise<CustomResponse> => {
-  return request({ baseURL, headers, method: 'post', url, data, params, responseType })
+const post = (
+  { baseURL, headers, url, data, params, responseType }: AxiosRequest,
+  alterErr = true
+): Promise<CustomResponse> => {
+  return request({ baseURL, headers, method: 'post', url, data, params, responseType }, alterErr)
 }
 
 export { get, post }

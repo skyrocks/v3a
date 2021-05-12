@@ -2,13 +2,13 @@
  * class模式,弃用
  **/
 import { message } from 'ant-design-vue'
-import { API_BASE } from '@/utils/env'
+import { env } from '@/utils'
 import { AxiosRequest, CustomResponse } from './types'
 import { localStore } from '@/utils/storage'
 import instance from './intercept'
 
 class Abstract {
-  protected baseURL: string = API_BASE
+  protected baseURL: string = env.API_BASE
 
   protected headers: object = {
     ContentType: 'application/json;charset=UTF-8'

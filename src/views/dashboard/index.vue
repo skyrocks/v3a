@@ -12,9 +12,9 @@
 
 <script lang="ts">
 import { defineComponent, getCurrentInstance, inject } from 'vue'
-import { Divider, message } from 'ant-design-vue'
-import { userApi } from '@/api/modules/user'
-import { menuApi } from '@/api/modules/menu'
+import { Divider } from 'ant-design-vue'
+// import { userApi } from '@/api/modules/user'
+// import { menuApi } from '@/api/modules/menu'
 import { log } from '@/utils'
 
 export default defineComponent({
@@ -42,33 +42,33 @@ export default defineComponent({
       */
     }
     const testErrorAuthRequestHandle = () => {
-      userApi.getUserAuth({}).then(resp => {
-        if (resp.success) {
-          message.success('success')
-        } else {
-          message.error(`dashboard ${resp.message}`)
-        }
-      })
+      // userApi.getUserAuth({}).then(resp => {
+      //   if (resp.success) {
+      //     message.success('success')
+      //   } else {
+      //     message.error(`dashboard ${resp.message}`)
+      //   }
+      // })
     }
     const testErrorInnerRequestHandle = () => {
-      userApi.getUserInner({}).then(resp => {
-        if (resp.success) {
-          message.success('success')
-        } else {
-          message.error(`dashboard ${resp.message}`)
-        }
-      })
+      // userApi.getUserInner({}).then(resp => {
+      //   if (resp.success) {
+      //     message.success('success')
+      //   } else {
+      //     message.error(`dashboard ${resp.message}`)
+      //   }
+      // })
     }
 
     const testSuccessRequestHandle = () => {
       log.action('测试正确的请求')
-      menuApi.getAuthMenu().then(resp => {
-        if (resp.success) {
-          message.success('success')
-        } else {
-          message.error(`dashboard ${resp.message}`)
-        }
-      })
+      // menuApi.getAuthMenu().then(resp => {
+      //   if (resp.success) {
+      //     message.success('success')
+      //   } else {
+      //     message.error(`dashboard ${resp.message}`)
+      //   }
+      // })
     }
 
     const testXButtonHandler = () => {

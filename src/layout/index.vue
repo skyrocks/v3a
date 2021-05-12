@@ -48,10 +48,12 @@ export default defineComponent({
   }
   .layout-content {
     flex: none;
-    margin: 24px 16px;
+    margin: $--header-content-space $--sider-content-space;
     padding: 24px;
     background: #fff;
     min-height: 280px;
+    height: $--content-height;
+    overflow: auto;
   }
 }
 </style>

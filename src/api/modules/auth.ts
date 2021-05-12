@@ -18,7 +18,7 @@ export const authApi = {
     return post({ url: `${ns}/login`, data })
   },
   profile: () => {
-    return get({ url: `${ns}/profile` })
+    return get({ url: `${ns}/profile` }, false)
   },
   sendSmsCode: (data: Sms) => {
     return post({ url: `${ns}/sms/code`, data })
